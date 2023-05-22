@@ -11,7 +11,7 @@
 #   9        9    18      36          54
 # То есть количество журавликов, сделанные детьми должно быть кратно 6, чтобы соблюдалось условию задачи
 
-S = int(input('Enter a multiple of 6: '))
+S = int(input('Введите число, кратное 6: '))
 
 if S%6 == 0:
     p = S/6
@@ -19,5 +19,5 @@ if S%6 == 0:
     print(f'Петя и Сережа сделали по {int(p)} журавликов, а Катя сделала {int(k)} журавликов.', end = " ")
     print(f'Вместе они сделали {S} журавликов.')
 else:
-    print('Error: Enter a multiple of 6')
+    print('Error: Does not correspond to the condition of the task')
 
