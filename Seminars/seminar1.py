@@ -16,25 +16,24 @@ elif n%3 == 0:
 else:
     print('Нечетное')
 """
-
-# a=[1,2,3,4]
+#"""
+a=[1,2,3,4]
 
 # for element in a:
 #     print(element)
-"""
-for i in range(len(a)):
-    if a[i]>2:
-        print(f'{i}-th element ')
-"""
-"""
+
+# for i in range(len(a)):
+#     if a[i]>2:
+#         print(f'{i+1}-th element > 2')
+
 # Более профессионально:
 for i, element in enumerate(a):
     if element > 2:
-        print(f'{i}-th element > 2')
+        print(f'{i+1}-th element > 2')
 
-for i in range(0,10,5):     # в скобках нач. число, конечное число, шаг
-    print(i)
-"""
+# for i in range(0,10,5):     # в скобках нач. число, конечное число, шаг
+#     print(i)
+#"""
 # n=10
 
 # while n>1:      # опасность - падение в бесконечный цикл
