@@ -45,3 +45,15 @@ else:
     print('Error: There is a fractional part in the discriminant,', end = " ")
     print('according to the condition of the problem, we have natural numbers')
 
+
+
+"""
+Идеальное решение от GB
+x = int(input())
+y = int(input())
+for i in range(x):
+    for j in range(y):
+        if x == i + j and y == i * j:
+            print(i, j)
+Из-за цикла в цикле сложность алгоритма большая O(n^2)
+"""
