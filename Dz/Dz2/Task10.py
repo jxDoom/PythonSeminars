@@ -24,7 +24,7 @@ elif o < r:
     print(f'The number of coins to be flipped to the side "reshka" is {o}')
 else:
     print('The number of coins "orel" and "reshka" is the same,', end = " ")
-    print('let the user choose which way to flip')
+    print('let the user choose which way to flip\n')
     print('Press "-1" - if you don\'t change anything,', end = " ")
     print('press "0" if you want to flip the coins to the side "orel",', end = " ")
     print('press "1" if you want to flip the coins to the side "reshka."')
