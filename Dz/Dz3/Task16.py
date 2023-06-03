@@ -14,8 +14,7 @@ try:
     find = int(input('What number are you looking for?\n'))
 
     for i in range(size):
-        tmp = random.randint(1, n)
-        lst.append(tmp)
+        lst.append(random.randint(1, n))
         if lst[i] == find:
             count += 1
     print(lst)
