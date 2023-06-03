@@ -7,13 +7,18 @@ import random
 lst = list()
 size = int(input('Enter list size = '))
 n = int(input('Enter max number in the array = '))
-find = int(input('What number are you looking for?\n'))
 count = 0
 
-for i in range(size):
-    tmp = random.randint(1, n)
-    lst.append(tmp)
-    if lst[i] == find:
-        count += 1
-print(lst)
-print(f'Number {find} appeared {count} times in the array')
+try:
+    n > 1
+    find = int(input('What number are you looking for?\n'))
+
+    for i in range(size):
+        tmp = random.randint(1, n)
+        lst.append(tmp)
+        if lst[i] == find:
+            count += 1
+    print(lst)
+    print(f'Number {find} appeared {count} times in the array')
+except:
+    exit('ValueError')
