@@ -14,8 +14,7 @@ try:
     num = int(input('Enter some number: '))
 
     for i in range(size):
-        tmp = random.randint(1, n)
-        lst.append(tmp)
+        lst.append(random.randint(1, n))
     print(lst)
     dif = abs(num - lst[0])
 
