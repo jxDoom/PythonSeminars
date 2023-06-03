@@ -154,7 +154,7 @@ dictionary = {'up': '↑', 'left': '←', 'down': '↓', 'right': '→'}
 # b = frozenset(a)
 # print(b)
 
-#Задача: Создать список,состоящийиз четных чисел от 1 до 100:
+#Задача: Создать список,состоящий из четных чисел от 1 до 100:
 # list_1 = [i for i in range(1, 101) if i%2 == 0]   #list comprehension
 # print(list_1)
 
