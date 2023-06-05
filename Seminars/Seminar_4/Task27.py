@@ -5,8 +5,17 @@
 # содержится в этом тексте.
 
 # Input: She sells sea shells on the sea shore The shells
-# that she sells are sea shells I'm sure.So if she sells sea
+# that she sells are sea shells I'm sure. So if she sells sea
 # shells on the sea shore I'm sure that the shells are sea
 # shore shells
-# Output: 13
+# Output: 19
 
+text = set('''She sells sea shells on the sea shore The shells
+that she sells are sea shells I'm sure. So if she sells sea
+shells on the sea shore I'm sure that the shells are sea
+shore shells'''.lower().strip('.?,!\n').replace('.', ' ').split())
+
+# text = set(text)
+print(text)
+
+print(f'Количество расличных слов в тексте = {len(text)}')

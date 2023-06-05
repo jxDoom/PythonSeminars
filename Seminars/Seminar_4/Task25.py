@@ -19,6 +19,7 @@ for i in range(len(s)):
     else:
         final_string += f' {s[i]}_{s[0:i].count(s[i])}'
 print(final_string)
+# Метод count() возвращает количество раз, когда указанный элемент появляется в списке
 
 # Решение с помощью словаря
 # el = {}
