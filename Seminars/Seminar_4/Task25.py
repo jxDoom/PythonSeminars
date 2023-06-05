@@ -9,17 +9,17 @@
 # .split()
 
 # Решение с помощью срезов
-s = 'a a a b c a a d c d d'.split()
-final_string = ''
-print(s)
+# s = 'a a a b c a a d c d d'.split()
+# final_string = ''
+# print(s)
 
-for i in range(len(s)):
-    if s[0:i].count(s[i]) == 0:
-        final_string += f' {s[i]}'
-    else:
-        final_string += f' {s[i]}_{s[0:i].count(s[i])}'
-print(final_string)
-# Метод count() возвращает количество раз, когда указанный элемент появляется в списке
+# for i in range(len(s)):
+#     if s[0:i].count(s[i]) == 0:
+#         final_string += f' {s[i]}'
+#     else:
+#         final_string += f' {s[i]}_{s[0:i].count(s[i])}'
+# print(final_string)
+# # Метод count() возвращает количество раз, когда указанный элемент появляется в списке
 
 # Решение с помощью словаря
 # el = {}
@@ -33,18 +33,14 @@ print(final_string)
 #         final_string += f'{i}_{el[i]-1} '
 # print(final_string)
 
-# Используя .get()
+# Используя .get() - заменяет строки 29 и 32 прошлого решения
 
-# s = 'aaabcaadcdd'
-# s = list(s)
-# print(s)
-# m = {}
-# str = ''
-
-# for i in range(len(s)):
-#     if m.get(s[i]) != None:
-#         m[s[i]] = int(m[s[i]]) + 1
-#     else:
-#         m[s[i]] = 1
-#     str += f'{s[i]}_{m[s[i]]} '
-# print(str)
+word = 'a a a b c a a d c d d'.split()
+result = {}
+for i in word:
+    if i in result:
+        print(f'{i}_{result[i]}', end = ' ')
+    else:
+        print(i, end = ' ')
+    result[i] = result.get(i, 0) + 1
+    print(i, result)
