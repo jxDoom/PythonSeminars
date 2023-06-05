@@ -27,3 +27,11 @@
 #     if max_number < n:
 #         n = max_number
 # print(n)
+
+n = int(input())
+max_number = n
+while n != 0 or n > 0:
+    n = int(input())
+    if max_number < n:
+        max_number = n
+print(max_number)
