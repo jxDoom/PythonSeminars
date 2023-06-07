@@ -11,3 +11,30 @@
 # которое может собрать за один заход собирающий модуль,
 # находясь перед некоторым кустом заданной во входном файле грядки.
 
+import random
+
+sum3 = 0
+max_sum3 = 0
+index = 0
+count = int(input('Enter number of bushes: '))
+n = [random.randint(0, 15) for i in range(count)]
+i = 1 - count
+print(n)
+
+while i < 1:
+    sum3 = n[i-1] + n[i] + n[i+1]
+    if sum3 > max_sum3:
+        max_sum3 = sum3
+        index = i
+    i += 1
+
+print(f'Maximum number of berries = {max_sum3}', end = ' ')
+if index+count+1 == count:
+    # index = count
+    print(f'in the bushes: {count-1}, {count}, {1}')
+elif index+count+1 == count+1:
+    # index = 0
+    print(f'in the bushes: {count}, {1}, {2}')
+else:
+    index = index+count+1
+    print(f'in the bushes: {index-1}, {index}, {index+1}')
