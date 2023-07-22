@@ -20,15 +20,16 @@ p = int(input('Second hint: Enter the product of two numbers = '))
 d = (-s) ** 2 - 4 * p
 if d > 0:
     a = d ** 0.5
-    x = int((s + a)/2)
-    y = int((s - a)/2)
+    a = int(a)
+    x = (s + a)//2
+    y = (s - a)//2
     if 0 <= x < 1001 and 0 <= y < 1001:
         print(f'These numbers are equal: X = {x} and Y = {y}')
     else:
         print('According to the condition of the problem,', end = " ")
         print('we have only natural numbers from 0 to 1000')
 elif d == 0:
-    x = y = s/2
+    x = y = s//2
     if 0 <= x < 1001 and 0 <= y < 1001:
         print(f'These numbers are equal: X = Y = {x}')
     else:
@@ -37,23 +38,21 @@ elif d == 0:
 else:
     print('Error: Task solution does not exist')
 
-# Verification
-
+# Verification:
 if x + y == s and x * y == p:
     print('Success')
 else:
-    print('Error: There is a fractional part in the discriminant,', end = " ")
-    print('according to the condition of the problem, we have natural numbers')
+    print(f'Not successful: sum = {x + y} and product = {x * y}')
 
 
-
+# ------------------------------------------------------------------------------
 """
-Идеальное решение от GB
+# Идеальное решение от GB
 x = int(input())
 y = int(input())
 for i in range(x):
     for j in range(y):
         if x == i + j and y == i * j:
             print(i, j)
-Из-за цикла в цикле сложность алгоритма большая O(n^2)
+# Из-за цикла в цикле сложность алгоритма большая O(n^2)
 """
