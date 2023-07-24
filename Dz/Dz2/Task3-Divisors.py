@@ -20,5 +20,5 @@ sp = [1, num]
 
 for i in range(2, 1 + int(num ** 0.5)):
     if num % i == 0:
-        sp.extend({num // i, i})
+        sp.extend([num // i, i])
 print(sorted(sp))
