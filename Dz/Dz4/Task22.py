@@ -3,19 +3,19 @@
 # Пользователь вводит 2 числа. n — кол-во элементов первого множества.
 # m — кол-во элементов второго множества. Затем пользователь вводит сами элементы множеств.
 
-import random
+from random import randint
 
-a = int(input('Initial value number: '))
-b = int(input('Final value number: '))
+a: int = int(input('Initial value number: '))
+b: int = int(input('Final value number: '))
 
-size_n = int(input('Enter size first set = '))
-size_m = int(input('Enter size second set = '))
+size_n: int = int(input('Enter size first set = '))
+size_m: int = int(input('Enter size second set = '))
 
-n = [random.randint(a, b) for i in range(size_n)]
+n = [randint(a, b) for i in range(size_n)]
 print(n)
 n = set(n)
 
-m = [random.randint(a, b) for i in range(size_m)]
+m = [randint(a, b) for i in range(size_m)]
 print(m)
 m = set(m)
 
