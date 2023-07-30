@@ -111,6 +111,24 @@
 from random import randint
 
 k = int(input("Введите натуральную максимальную степень "))
-sp = [randint(0,10) for _ in range(k+1)]
+# sp = [randint(-100, 100) for _ in range(k + 1)]
+sp = [randint(0, 100) for _ in range(k + 1)]
 print(sp)
-#[0,8,1,10]  - >  8*x^2 + x +10 = 0
+res = ''
+for i in range((len(sp)-1), -1, -1):    
+    if sp[i] == 0:
+        res += ''
+    elif sp[i] == 1 and i == 0:
+        res += '1 + '
+    elif sp[i] == 1 and i == 1:
+        res += 'x + '
+    elif sp[i] == 1:
+        res += f'x^{i} + '
+    elif i == 0:
+        res += f'{sp[i]} + '
+    elif i == 1:
+        res += f'{sp[i]}x + '
+    else:    
+        res += f'{sp[i]}x^{i} + '
+print(res[:-3], '= 0')
+#print(res[:-3].replace('+ -', '- '), '= 0')
