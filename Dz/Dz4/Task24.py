@@ -11,13 +11,13 @@
 # которое может собрать за один заход собирающий модуль,
 # находясь перед некоторым кустом заданной во входном файле грядки.
 
-import random
+from random import randint
 
+count: int = int(input('Enter number of bushes: '))
 sum3 = 0
 max_sum3 = 0
 index = 0
-count = int(input('Enter number of bushes: '))
-n = [random.randint(0, 15) for i in range(count)]
+n = [randint(0, 15) for i in range(count)]
 i = 1 - count
 print(n)
 
