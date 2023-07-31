@@ -9,12 +9,15 @@ num: int = int(input('Enter natural number = '))
 # Разрядность целого типа int составляет 32 бита (2^32) или от -2 147 483 648 до 2 147 483 647.
 # Так как числа будут представляться в двоичном/восьмеричном измерении, то диапазон сократится
 # от 0 до 2 147 483 647, т.е. 2^31
+
 print(bin(num))
-#print(oct(num))
+print(oct(num))
 
 i = 31
 arr_bin = []
+arr_oct = []
 str_bin = ''
+str_oct = ''
 dict_oct = {'000': 0, '001': 1, '010': 2, '011': 3,
             '100': 4, '101': 5, '110': 6, '111': 7 }
 while i > 0:
@@ -25,4 +28,20 @@ while i > 0:
 for i in arr_bin[::-1]:
     str_bin += str(i)
 
-print(int(str_bin))
+str_bin = int(str_bin)
+print(str_bin)
+
+# Следующий кусок кода преобразует двоичный код в восьмеричную систему счисления
+while str_bin > 0:
+    tmp = str_bin % 1000
+    tmp = str(tmp)
+    str_bin //= 1000
+    while len(tmp) != 3: tmp = '0' + str(tmp)
+    for key, value in dict_oct.items():
+        if tmp == key:
+            arr_oct.append(value)
+
+for i in arr_oct[::-1]:
+    str_oct += str(i)
+
+print(int(str_oct))
