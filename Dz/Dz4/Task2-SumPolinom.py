@@ -19,6 +19,16 @@ def completingDict(exponent):
 exp_max1: int = int(input('Введите максимальную натуральную степень первого многочлена: '))
 exp_max2: int = int(input('Введите максимальную натуральную степень второго многочлена: '))
 
-print('Первый многочлен:\n',completingDict(exp_max1))
+dict_plm1 = completingDict(exp_max1)
+print('Первый многочлен:\n', dict_plm1)
 print()
-print('Второй многочлен:\n',completingDict(exp_max2))
+dict_plm2 = completingDict(exp_max2)
+print('Второй многочлен:\n', dict_plm2)
+
+# for key, value in dict_plm2.items():
+#     if key in dict_plm1:
+#         dict_plm1[key].extend(value)
+#     else:
+#         dict_plm1 = value
+
+print(dict_plm1)
