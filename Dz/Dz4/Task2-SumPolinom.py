@@ -6,11 +6,19 @@
 # на выходе будет 5x^3 - x^2 + 4х - 7 = 0
 # Можно использовать модуль re
 
+def completingDict(exponent):
+    array = []
+    dictionary = {}
+    for i in range(exponent, -1, -1):
+        tmp = [f'x^{i}', int(input(f'Введите коэффициент при x в степени {i} = '))]
+        array.append(tmp)
+    print()
+    dictionary = dict(array)
+    return dictionary
+
 exp_max1: int = int(input('Введите максимальную натуральную степень первого многочлена: '))
 exp_max2: int = int(input('Введите максимальную натуральную степень второго многочлена: '))
 
-arr_plm1 = [int(input(f'Введите коэффициент при x в степени {i} = ')) for i in range(exp_max1, -1, -1)]
-print(arr_plm1) # Коэффициенты первого многочлена
-
-arr_plm2 = [int(input(f'Введите коэффициент при x в степени {i} = ')) for i in range(exp_max2, -1, -1)]
-print(arr_plm2) # Коэффициенты второго многочлена
+print('Первый многочлен:\n',completingDict(exp_max1))
+print()
+print('Второй многочлен:\n',completingDict(exp_max2))
