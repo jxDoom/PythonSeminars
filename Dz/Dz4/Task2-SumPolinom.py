@@ -52,7 +52,6 @@ def equationPrint(dictionary):
     return res
 
 exp_max1: int = int(input('Введите максимальную натуральную степень первого многочлена: '))
-
 dict_plm1 = completingDict(exp_max1)
 print('Первый многочлен:\n', equationPrint(dict_plm1), '= 0')
 print()
