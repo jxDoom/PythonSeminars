@@ -55,8 +55,8 @@
 # res = select(lambda x: (x, x**2), res)
 # print(res)
 
-# -----------------------------------------------------------------------
-# Функция map()
+# -----------------------------------------------------------------------------------------------
+# Функция map() - ко всем значениям элементов (ко всем объектам) применяет какую-либо функцию
 # list_1 = [x for x in range(1, 20)]
 # print(list_1)
 
@@ -82,4 +82,66 @@
 # res = list(map(lambda x: (x, x**2), res))
 # print(res)
 
-# Функция filter
+# --------------------------------------------------------------------
+# Функция filter - возвращает значение True
+# data = [15, 65, 9, 35, 175]
+# res = list(filter(lambda x: x % 10 == 5, data))
+# print(res)
+
+# sp = [1, 2, 3, 5, 8, 15, 23, 38]
+# res = map(int, sp)
+# res = filter(lambda x: x % 2 == 0, sp)
+# res = list(map(lambda x: (x, x**2), res))
+# print(res)
+
+# -----------------------------------------------------------------
+# Функция zip
+# users = ['user1', 'user2', 'user3', 'user4', 'user5']
+# ids = [4, 5, 9, 14, 7]
+# data = list(zip(users, ids))
+# print(data)
+
+# users = ['user1', 'user2', 'user3', 'user4', 'user5']
+# ids = [4, 5, 9, 14, 7]
+# salary = [111, 222, 333]
+# data = list(zip(users, ids, salary))
+# print(data)
+
+# -------------------------------------------------------------------------
+# Функция enumerate
+# users = ['user1', 'user2', 'user3']
+# data = list(enumerate(users))
+# print(data)
+
+# ----------------------------------------------------------------------
+# Файлы
+# Режим a
+# colors = ['red', 'green', 'blue']
+# data = open('file.txt', 'a', encoding='utf-8') # здесь указываем режим, в котором будем работать, кодировка utf-8 уже стоит по умолчанию
+# data.writelines(colors) # разделителей не будет
+# data.close()
+# # ● data.close() — используется для закрытия файла, чтобы разорвать подключение файловой
+# # переменной с файлом на диске.
+# # ● exit() — позволяет не выполнять код, прописанный после этой команды в скрипте.
+# # ● В итоге создаётся текстовый файл с текстом внутри: redbluedreen.
+# # ● При повторном выполнении скрипта redbluedreenredbluedreen — добавление в
+# # существующий файл, а не перезапись файлов.
+
+# with open('file.txt', 'w') as data:
+#     data.write('line 1\n')
+#     data.write('line 2\n')
+
+# Режим r
+# path = 'file.txt'
+# data = open(path, 'r')
+# for line in data:
+#     print(line)
+# data.close()
+
+# Режим w
+# colors = ['red', 'green', 'blue']
+# data = open('file.txt', 'w')
+# data.writelines(colors) # разделителей не будет
+# data.close()
+# # ● В итоге создаётся текстовый файл с текстом внутри: ‘redbluedreen’.
+# # ● В случае перезаписи новые данные записываются, а старые удаляются.
