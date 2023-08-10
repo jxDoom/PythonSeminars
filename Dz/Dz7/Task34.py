@@ -13,3 +13,27 @@
 
 # Ввод: пара-ра-рам рам-пам-папам па-ра-па-да    
 # Вывод: Парам пам-пам
+
+# Число слогов = количеству гласных букв
+# пример: в слове 'Ураааааа' 7 слогов ('У-ра-а-а-а-а-а')
+
+def PhraseCounter(poesy):
+    vowels = 'аоиеёяуыюэ'
+    counter = []
+    for item in range(len(poesy)):
+        count = 0
+        for iter in range(len(poesy[item])):
+            if poesy[item][iter] in vowels:
+                count += 1
+        counter.append(count)
+    return counter
+
+RhythmCheck = lambda spisok: all(spisok[i] == spisok[i + 1] for i in range(len(spisok) - 1))
+    
+def Start():
+    strr = input('Введите фразы в одну строку\n').lower().split()
+    if RhythmCheck(PhraseCounter(strr)):
+        print('Парам пам-пам')
+    else: print('Пам парам')
+
+Start()
