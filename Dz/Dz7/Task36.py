@@ -18,3 +18,37 @@
 # 4  8 12 16 20 24
 # 5 10 15 20 25 30
 # 6 12 18 24 30 36
+
+# Для квадратной матрицы
+# def print_operation_table(multi):
+#     for num_columns in range(1, multi + 1):
+#         for num_rows in range(1, multi):
+#             print(num_rows * num_columns, end = '\t')
+#         print(num_columns * multi)
+#     return 0
+
+# num: int = int(input('Enter the maximum multiplier: '))
+# print_operation_table(num)
+
+# Другое решение
+# print(*(lambda x: ('\t'.join(f'{i * j}' for j in range(1, x)) for i in range(1, x)))(int(input('Enter the maximum multiplier: ')) + 1), sep = '\n')
+
+# ----------------------------------------------------------
+# Для прямоугольной (произвольной) матрицы
+# def print_operation_table(num_rows, num_columns):
+#     for i in range(1, num_rows + 1):
+#         for j in range(1, num_columns + 1):
+#             print(i * j, end = '\t')
+#         print(sep = '\n')
+#     return 0
+
+# x: int = int(input('Enter quantity rows: '))
+# y: int = int(input('Enter quantity columns: '))
+# print_operation_table(x, y)
+
+# Другое решение
+print_operation_table = lambda x, y: (('\n'.join('\t'.join(f'{i * j}' for j in range(1, y + 1)) for i in range(1, x + 1))))
+
+num_rows: int = int(input('Enter quantity rows: '))
+num_columns: int = int(input('Enter quantity columns: '))
+print(print_operation_table(num_rows, num_columns))
