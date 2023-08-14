@@ -9,6 +9,8 @@
 # |     |  O |
 # При ходе пользователя у надо спрашивать номер строки и столбца, куда он хочет сделать ход
 
+from random import randint
+
 # field = [None, None, None,
 #          None, None, None,
 #          None, None, None]
@@ -44,14 +46,37 @@ def Winner(win_arr):
     return message
 
 # Ход игрока
-def StepHuman(arr, symbol):
+def StepPlayer(arr, symbol):
     tmp = int(input('Ваш ход: ')) - 1
     if arr[tmp] != 'X' and arr[tmp] != 'O':
         arr[tmp] = symbol
     else:    
         print('Эта клетка занята, выберите другую клетку')
-        StepHuman(arr, symbol)
+        StepPlayer(arr, symbol)
     return arr
+
+# Псевдоинтеллект: поиск победных линий
+def AI(win_arr, arr, sum_x, sum_o):
+    step = ''
+    for line in win_arr:
+        count_x = count_o = 0
+
+        for i in range(3):
+            if arr[line[i]] == 'X':
+                count_x += 1
+            elif arr[line[i]] == 'O':
+                count_o += 1
+
+        if count_x == sum_x and count_o == sum_o:
+            for j in range(3):
+                if arr[line[j]] == ' ':
+                    step = arr[line[j]]
+    return step
+
+# Ход псевдоинтеллекта
+def StepAI(arr):
+    step = ''
+    step = AI(field, sym1, sym2)
 
 # Пустые ячейки
 field = ['O', ' ', ' ', 'X', ' ', 'O', ' ', ' ', ' ']
@@ -69,8 +94,12 @@ victory = [[0, 1, 2],
 #Standart(print('"Рабочие" клавиши:'))
 #FieldInit(field)
 #Winner(victory)
-print(StepHuman(field, 'X'))
+#print(StepPlayer(field, 'X'))
+#AI(victory, field,,)
 
 
 # def Ranking(arr):
 #     for i in arr:
+
+
+
