@@ -17,6 +17,7 @@ from random import sample
 
 # Пустые ячейки
 field = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+field = ['X', 'X', ' ', ' ', ' ', 'O', ' ', ' ', 'X']
 
 # Победные комбинации
 victory = [[0, 1, 2],
@@ -60,15 +61,15 @@ def Winner(win_arr):
 #"""
 # Выбор символа: крестик 'X' или нолик 'O' (выбор игрока)
 def PickPlayer(message = ''):
-    try:
-        pick: int = int(input())
-        if pick == 1:
-            symbol = 'X'
-        elif pick == 0:
-            symbol = 'O'
-        return symbol
-    except:
-        print('Ошибка: Вы нажали не ту кнопку')
+    # try:
+    pick: int = int(input())
+    if pick == 1:
+        symbol = 'X'
+    elif pick == 0:
+        symbol = 'O'
+    return symbol
+    # except:
+    #     print('Ошибка: Вы нажали не ту кнопку')
 
 # Возвращаем символ искусственного интелекта
 def PickAI():
@@ -91,9 +92,9 @@ def StepPlayer(arr, symbol):
     return arr
 
 # Ход компьютера
-def StepAI(arr, step):
-    pick_ai = PickAI()
-    arr[step] = pick_ai
+# def StepAI(arr, step):
+    
+#     arr[step] = PickAI()
     
 # Псевдоинтеллект: поиск победных линий
 def AI(win_arr, arr, sum_x, sum_o):
@@ -106,7 +107,7 @@ def AI(win_arr, arr, sum_x, sum_o):
                 count_x += 1
             elif arr[line[i]] == 'O':
                 count_o += 1
-
+        
         if count_x == sum_x and count_o == sum_o:
             for j in range(3):
                 if arr[line[j]] == ' ':
@@ -121,11 +122,11 @@ def ConditionAI(arr):
 
     # if PickAI() == 'O':
     # 1. Если наша линия победная - добиваем её
-    step = AI(arr, 2, 0)
+    step = AI(victory, arr, 2, 0)
     
     # 2. Если чужая линия победная - защищаем её
     if step == '':
-        step = AI(arr, 0, 2)
+        step = AI(victory, arr, 0, 2)
 
     # 3. Если центр пуст - занимаем его
     if step == '':
@@ -134,12 +135,16 @@ def ConditionAI(arr):
 
     # 4. Если один символ наш и нет чужих на линии - добавляем ещё
     if step == '':
-        step = AI(arr, 1, 0)
+        step = AI(victory, arr, 1, 0)
 
     # 5. Если центр занят, выбираем любую клетку (когда игрок 'X' и он занял центр)
     if step == '':
-        if arr[4] != ' ':
-            step = arr(*sample(select, 1))
+        # if arr[4] != ' ':
+        #     step = arr(*sample(select, 1))
+        if arr[0] == ' ':
+            step = arr[0]
+
+    return step
 
 def Start():
     Standart(print('"Рабочие" клавиши:'))
@@ -155,20 +160,33 @@ def Start():
             print('Ход компьютера')
             sym = PickAI()
             step = ConditionAI(field)
-
-    if step != ' ':
-        StepAI(field, step)
-        win = Winner(victory)
-        if win != '':
-            end = True
+        
+        if step != '':
+            step = sym
+            win = Winner(victory)
+            if win != '':
+                end = True
+            else:
+                end = False
         else:
-            end = False
-    else:
-        print('Ничья')
-        end = True
-    player = not player
+            print('Ничья')
+            end = True
+        player = not(player)
 
-    FieldInit(field)
+FieldInit(field)
 
 
-Start()
+#Start()
+step = ''
+for line in victory:
+    count_x = count_o = 0
+    for i in range(3):
+            if field[line[i]] == 'X':
+                count_x += 1
+            elif field[line[i]] == 'O':
+                count_o += 1
+    if count_x == 2 and count_o == 0:
+                for j in range(0, 3):
+                    if field[line[j]] != 'X' and field[line[j]] != 'O':
+                        step = field[line[j]]
+print(step)
