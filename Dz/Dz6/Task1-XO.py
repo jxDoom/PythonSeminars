@@ -10,6 +10,7 @@
 # При ходе пользователя у надо спрашивать номер строки и столбца, куда он хочет сделать ход
 #"""
 from random import sample
+import time
 
 # field = [None, None, None,
 #          None, None, None,
@@ -17,7 +18,7 @@ from random import sample
 
 # Пустые ячейки
 field = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-field = ['X', 'X', ' ', ' ', ' ', 'O', ' ', ' ', 'X']
+#field = ['X', ' ', ' ', ' ', ' ', 'O', ' ', ' ', 'X']
 
 # Победные комбинации
 victory = [[0, 1, 2],
@@ -50,13 +51,13 @@ def FieldInit(arr):
     print(arr[8])
 
 # Поиск победителя после каждого хода
-def Winner(win_arr):
+def Winner(win_arr, arr):
     message = ''
     for i in win_arr:
-        if win_arr[i[0]] == 'X' and win_arr[i[1]] == 'X' and win_arr[i[2]] == 'X':
-            message = 'Победили крестики'
-        elif win_arr[i[0]] == 'O' and win_arr[i[1]] == 'O' and win_arr[i[2]] == 'O':
-            message = 'Победили нолики'
+        if arr[i[0]] == 'X' and arr[i[1]] == 'X' and arr[i[2]] == 'X':
+            message = 'победили крестики'
+        elif arr[i[0]] == 'O' and arr[i[1]] == 'O' and arr[i[2]] == 'O':
+            message = 'победили нолики'
     return message
 #"""
 # Выбор символа: крестик 'X' или нолик 'O' (выбор игрока)
@@ -71,16 +72,6 @@ def PickPlayer(message = ''):
     # except:
     #     print('Ошибка: Вы нажали не ту кнопку')
 
-# Возвращаем символ искусственного интелекта
-def PickAI():
-    sym = PickPlayer()
-    if sym == 'X':
-        pick_ai = 'O'
-    elif sym == 'O':
-        pick_ai = 'X'
-    return pick_ai
-
-#"""
 # Ход игрока
 def StepPlayer(arr, symbol):
     tmp = int(input('Ваш ход: ')) - 1
@@ -91,11 +82,6 @@ def StepPlayer(arr, symbol):
         StepPlayer(arr, symbol)
     return arr
 
-# Ход компьютера
-# def StepAI(arr, step):
-    
-#     arr[step] = PickAI()
-    
 # Псевдоинтеллект: поиск победных линий
 def AI(win_arr, arr, sum_x, sum_o):
     step = ''
@@ -107,86 +93,73 @@ def AI(win_arr, arr, sum_x, sum_o):
                 count_x += 1
             elif arr[line[i]] == 'O':
                 count_o += 1
-        
+            
         if count_x == sum_x and count_o == sum_o:
             for j in range(3):
                 if arr[line[j]] == ' ':
-                    step = arr[line[j]]
+                    step = line[j]
+
     return step
 
-# # Выбор хода псевдоинтеллекта (под цифрами будут описаны приоритеты выполнения кода)
+# Выбор хода псевдоинтеллекта (под цифрами будут описаны приоритеты выполнения кода)
 def ConditionAI(arr):
     step = ''
-    select = [1, 2, 3, 4, 6, 7, 8, 9]
+    select = [0, 1, 2, 3, 5, 6, 7, 8]
     # if PickAI() == 'X':
 
     # if PickAI() == 'O':
     # 1. Если наша линия победная - добиваем её
-    step = AI(victory, arr, 2, 0)
+    step = AI(victory, field, 2, 0)
     
     # 2. Если чужая линия победная - защищаем её
     if step == '':
-        step = AI(victory, arr, 0, 2)
+        step = AI(victory, field, 0, 2)
 
     # 3. Если центр пуст - занимаем его
     if step == '':
         if arr[4] == ' ':
-            step = arr[4]
+            step = 4
 
     # 4. Если один символ наш и нет чужих на линии - добавляем ещё
     if step == '':
-        step = AI(victory, arr, 1, 0)
+        step = AI(victory, field, 1, 0)
 
     # 5. Если центр занят, выбираем любую клетку (когда игрок 'X' и он занял центр)
     if step == '':
-        # if arr[4] != ' ':
-        #     step = arr(*sample(select, 1))
-        if arr[0] == ' ':
-            step = arr[0]
+        if arr[4] != ' ':
+            step = int(*sample(select, 1))
 
     return step
 
-def Start():
+def Start(arr):
+    end = False
     Standart(print('"Рабочие" клавиши:'))
     sym_player = PickPlayer(print('Нажмите 1, чтобы выбрать крестики или 0, чтобы выбрать нолики'))
-    end = False
-    player = True
+    if sym_player == 'X':
+        sym_ai = 'O'
+        player = True
+    elif sym_player == 'O':
+        sym_ai = 'X'
+        player = False
     while end == False:
         FieldInit(field)
         if player == True:
-            sym = sym_player
-            step = StepPlayer(field, sym)
+            StepPlayer(field, sym_player)
         else:
             print('Ход компьютера')
-            sym = PickAI()
-            step = ConditionAI(field)
-        
-        if step != '':
-            step = sym
-            win = Winner(victory)
-            if win != '':
-                end = True
-            else:
-                end = False
-        else:
-            print('Ничья')
+            time.sleep(2)
+            arr[ConditionAI(field)] = sym_ai
+        #------------------------- продолжить писать от сюда, все выше рабочее
+        #if step != '':
+        win = Winner(victory, field)
+        if win:
             end = True
-        player = not(player)
+        else:
+            end = False
+            
+        player = not player
 
-FieldInit(field)
+    FieldInit(field)
+    print(f'Игра окончена, {win}')
 
-
-#Start()
-step = ''
-for line in victory:
-    count_x = count_o = 0
-    for i in range(3):
-            if field[line[i]] == 'X':
-                count_x += 1
-            elif field[line[i]] == 'O':
-                count_o += 1
-    if count_x == 2 and count_o == 0:
-                for j in range(0, 3):
-                    if field[line[j]] != 'X' and field[line[j]] != 'O':
-                        step = field[line[j]]
-print(step)
+Start(field)
