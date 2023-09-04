@@ -18,7 +18,6 @@ import time
 
 # Пустые ячейки
 field = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-#field = ['X', ' ', ' ', ' ', ' ', 'O', ' ', ' ', 'X']
 
 # Победные комбинации
 victory = [[0, 1, 2],
@@ -59,7 +58,7 @@ def Winner(win_arr, arr):
         elif arr[i[0]] == 'O' and arr[i[1]] == 'O' and arr[i[2]] == 'O':
             message = 'победили нолики'
     return message
-#"""
+    
 # Выбор символа: крестик 'X' или нолик 'O' (выбор игрока)
 def PickPlayer(message = ''):
     # try:
@@ -84,7 +83,7 @@ def StepPlayer(arr, symbol):
 
 # Псевдоинтеллект: поиск победных линий
 def AI(win_arr, arr, sum_x, sum_o):
-    step = ''
+    step = -1
     for line in win_arr:
         count_x = count_o = 0
 
@@ -97,37 +96,43 @@ def AI(win_arr, arr, sum_x, sum_o):
         if count_x == sum_x and count_o == sum_o:
             for j in range(3):
                 if arr[line[j]] == ' ':
-                    step = line[j]
+                    step = line[j]                
 
     return step
 
 # Выбор хода псевдоинтеллекта (под цифрами будут описаны приоритеты выполнения кода)
 def ConditionAI(arr):
-    step = ''
     select = [0, 1, 2, 3, 5, 6, 7, 8]
-    # if PickAI() == 'X':
 
-    # if PickAI() == 'O':
     # 1. Если наша линия победная - добиваем её
-    step = AI(victory, field, 2, 0)
+    step = AI(victory, arr, 2, 0)
     
     # 2. Если чужая линия победная - защищаем её
-    if step == '':
-        step = AI(victory, field, 0, 2)
+    if step == -1:
+        step = AI(victory, arr, 0, 2)
 
     # 3. Если центр пуст - занимаем его
-    if step == '':
+    if step == -1:
         if arr[4] == ' ':
             step = 4
 
     # 4. Если один символ наш и нет чужих на линии - добавляем ещё
-    if step == '':
-        step = AI(victory, field, 1, 0)
+    if step == -1:
+        step = AI(victory, arr, 1, 0)
 
     # 5. Если центр занят, выбираем любую клетку (когда игрок 'X' и он занял центр)
-    if step == '':
+    if step == -1:
         if arr[4] != ' ':
             step = int(*sample(select, 1))
+
+    # 6. Исправление бага с заполнением псевдоинтеллектом последнего символа в игровом поле
+    count = index = 0
+    for i, el in enumerate(arr):
+        if ' ' == el:
+            count += 1
+            index = i
+    if count == 1:
+        step = index
 
     return step
 
@@ -142,24 +147,33 @@ def Start(arr):
         sym_ai = 'X'
         player = False
     while end == False:
-        FieldInit(field)
+        FieldInit(arr)
+        
         if player == True:
-            StepPlayer(field, sym_player)
+            StepPlayer(arr, sym_player)
         else:
             print('Ход компьютера')
-            time.sleep(2)
-            arr[ConditionAI(field)] = sym_ai
-        #------------------------- продолжить писать от сюда, все выше рабочее
-        #if step != '':
-        win = Winner(victory, field)
-        if win:
+            step = ConditionAI(arr)
+            time.sleep(1.5)
+
+            if step != -1:
+                arr[step] = sym_ai
+                win = Winner(victory, arr)
+                if win:
+                    end = True
+                else:
+                    end = False
+            else:           #срабатывает, когда компьютер - нолик 'O'
+                win = 'ничья'
+                end = True
+        
+        if ' ' not in arr:  #срабатывает, когда компьютер - крестик 'X'
+            win = 'ничья'
             end = True
-        else:
-            end = False
-            
+
         player = not player
 
-    FieldInit(field)
+    FieldInit(arr)
     print(f'Игра окончена, {win}')
 
 Start(field)
